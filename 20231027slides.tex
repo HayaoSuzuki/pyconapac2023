@@ -1,0 +1,161 @@
+\documentclass[aspectratio=169,dvipdfmx,14pt,notheorems]{beamer}
+%%%% 和文用 %%%%%
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{minijs}%和文用
+\renewcommand{\kanjifamilydefault}{\gtdefault}%和文用
+
+%%%% スライドの見た目 %%%%%
+\usetheme{Madrid}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}%好みに応じてどうぞ）
+\setbeamertemplate{blocks}[rounded]
+\useinnertheme{circles}
+\setbeamertemplate{footline}[page number]
+\setbeamerfont{footline}{size=\normalsize,series=\bfseries}
+\setbeamercolor{footline}{fg=black,bg=black}
+%%%%
+
+%%%% 定義環境 %%%%%
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{definition}{定義}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{conjecture}{予想}
+\newtheorem*{remark}{Remark}
+\renewcommand{\proofname}{}
+%%%%%%%%%
+
+%%%%% フォント基本設定 %%%%%
+\usepackage[T1]{fontenc}%8bit フォント
+\usepackage{textcomp}%欧文フォントの追加
+\usepackage[utf8]{inputenc}%文字コードをUTF-8
+\usepackage[deluxe]{otf}%otfパッケージ
+\usepackage{lxfonts}%数式・英文ローマン体を Lxfont にする
+\usepackage{bm}%数式太字
+%%%%%%%%%%
+
+%%%%% PythonTeX %%%%%
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+ 
+\title{Let's implement useless Python objects}
+\subtitle{役に立たないPythonオブジェクトを作ろう}
+\author[Hayao]{Hayao Suzuki}
+\institute[PyCon APAC 2023]{PyCon APAC 2023}
+\date{October 27, 2023}
+
+\begin{document}
+
+\begin{frame}[plain]\frametitle{}
+\titlepage %表紙
+\end{frame}
+
+\begin{frame}\frametitle{And now...}
+
+\begin{block}{GitHub}
+\begin{itemize}
+\item \url{https://github.com/HayaoSuzuki/pyconapac2023}
+\end{itemize}
+\end{block}
+
+\begin{block}{Hashtag}
+\begin{itemize}
+\item \#pyconapac \#pyconapac2023 \#pyconjp
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}\frametitle{Who am I ?}
+
+\begin{block}{Who am I ?（お前誰よ）}
+\begin{description}
+\item[Name] Hayao Suzuki（鈴木　駿）
+\item[X(Twitter)] \href{https://twitter.com/CardinalXaro}{@CardinalXaro}
+\item[Work] Software Developer @ BeProud Inc.
+\end{description}
+\end{block}
+
+\begin{center}
+\begin{itemize}
+\item BeProud Inc. \includegraphics[width=3cm]{bplogo.png}
+\begin{itemize}
+\item connpass \includegraphics[width=2cm]{connpass_logo_1.png}
+\item PyQ \includegraphics[width=1cm]{pyq_logo_color.png}
+\item Tracery \includegraphics[width=3cm]{tracery.png}
+\end{itemize}
+\end{itemize}
+\end{center}
+
+\end{frame}
+
+\begin{frame}\frametitle{Who am I ?}
+
+\begin{block}{Translated Books}
+\begin{itemize}
+\item \structure{TBA}(O'Reilly Japan) \structure{New!}
+\end{itemize}
+\end{block}
+
+\begin{block}{Supervised Translated Books}
+\begin{itemize}
+\item \structure{Introducing Python 2nd ed.}(O'Reilly Japan)
+\item \structure{Robust Python}(O'Reilly Japan)
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Who am I ?}
+
+\begin{block}{Selected Presentations at PyCon JP}
+\begin{itemize}
+\item \structure{Symbolic Mathematics using SymPy}(PyCon JP 2018)
+\item \structure{How to Use In-Memory Streams}(PyCon JP 2020)
+\item \structure{Unknown Evolution of the Built-in Function pow}(PyCon JP 2021)
+\end{itemize}
+\end{block}
+Listed at \url{https://xaro.hatenablog.jp/} .
+\end{frame}
+
+\section{Useless!}
+
+\begin{frame}\frametitle{Today's Theme}
+
+\begin{center}
+\Huge{Let's implement \structure{useless} Python objects}
+\end{center}
+
+\end{frame}
+
+\begin{frame}\frametitle{What is it mean useless?}
+
+\begin{block}{From LDOCE}
+\begin{enumerate}
+\item not useful or effective in any way
+\item (informal) unable or unwilling to do anything properly
+\end{enumerate}
+\end{block}
+
+\end{frame}
+
+\begin{frame}\frametitle{Is the useless object really useless?}
+
+\begin{block}{From Zhuangzi Ren-jian shi（荘子 人間世篇）}
+人皆知有用之用 而莫知無用之用也
+\end{block}
+Everyone knows the usefullness of the usefull, but no one knows the usefullness of useless.
+
+\end{frame}
+
+
+\end{document}
