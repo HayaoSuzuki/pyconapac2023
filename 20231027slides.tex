@@ -49,6 +49,7 @@
 \subtitle{役に立たないPythonオブジェクトを作ろう}
 \author[Hayao]{Hayao Suzuki}
 \institute[PyCon APAC 2023]{PyCon APAC 2023}
+\titlegraphic{\includegraphics[scale=0.2]{pyconlogo.png}}
 \date{October 27, 2023}
 
 \begin{document}
@@ -57,7 +58,7 @@
 \titlepage %表紙
 \end{frame}
 
-\begin{frame}\frametitle{And now...}
+\begin{frame}\frametitle{Share it}
 
 \begin{block}{GitHub}
 \begin{itemize}
@@ -117,7 +118,7 @@
 
 \begin{frame}\frametitle{Who am I ?}
 
-\begin{block}{Selected Presentations at PyCon JP}
+\begin{block}{Selected My Talks}
 \begin{itemize}
 \item \structure{Symbolic Mathematics using SymPy}(PyCon JP 2018)
 \item \structure{How to Use In-Memory Streams}(PyCon JP 2020)
@@ -128,6 +129,14 @@ Listed at \url{https://xaro.hatenablog.jp/} .
 \end{frame}
 
 \section{Useless!}
+
+\begin{frame}\frametitle{Today's Theme}
+
+\begin{center}
+\Huge{And now for something completely different...}
+\end{center}
+
+\end{frame}
 
 \begin{frame}\frametitle{Today's Theme}
 
@@ -153,9 +162,72 @@ Listed at \url{https://xaro.hatenablog.jp/} .
 \begin{block}{From Zhuangzi Ren-jian shi（荘子 人間世篇）}
 人皆知有用之用 而莫知無用之用也
 \end{block}
-Everyone knows the usefullness of the usefull, but no one knows the usefullness of useless.
+Everyone knows the usefulness of the useful, but no one knows the usefulness of the useless.
 
 \end{frame}
 
+\begin{frame}\frametitle{Today's Theme}
+
+\begin{block}{Let's implement useless Python objects}
+The useless objects are useless, but how to make a useless object is very useful.
+\end{block}
+
+\end{frame}
+
+\section{Basic useless Python objects}
+
+\begin{frame}[fragile]\frametitle{What is a useless Python object?}
+
+\begin{exampleblock}{Example: \texttt{ElasticSized}}
+\begin{pygments}{python}
+>>> s = ElasticSized([1, 2, 3, 4, 5])
+>>> for _ in range(3):
+...     print(len(s), end=" ")
+...
+1 3 4
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{What is a useless Python object?}
+
+\begin{exampleblock}{Example: \texttt{ForgottenContainer}}
+\begin{pygments}{python}
+>>> c = ForgottenContainer([1, 2, 3, 4, 5])
+>>> for _ in range(3):
+...     print(3 in c, end=" ")
+...
+False True False
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{What is a useless Python object?}
+
+\begin{exampleblock}{Example: \texttt{ShuffledIterable}}
+\begin{pygments}{python}
+>>> it = ShuffledIterable([1, 2, 3, 4, 5])
+>>> for _ in range(3):
+...     for v in it:
+...         print(v, end=" ")
+...     print()
+...
+5 3 4 2 1 
+4 1 2 3 5 
+2 5 3 1 4
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}\frametitle{What is a useless Python object?}
+
+\begin{block}{Definition of a useless Python object in this talk}
+A useless Python object behave \structure{Pythonic}, but does not work as expected.
+\end{block}
+
+\end{frame}
 
 \end{document}
