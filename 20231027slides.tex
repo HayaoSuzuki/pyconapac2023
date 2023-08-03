@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169,dvipdfmx,14pt,notheorems]{beamer}
+\documentclass[aspectratio=169,dvipdfmx,12pt,notheorems]{beamer}
 %%%% 和文用 %%%%%
 \usepackage{bxdpx-beamer}
 \usepackage{pxjahyper}
@@ -133,14 +133,6 @@ Listed at \url{https://xaro.hatenablog.jp/} .
 \begin{frame}\frametitle{Today's Theme}
 
 \begin{center}
-\Huge{And now for something completely different...}
-\end{center}
-
-\end{frame}
-
-\begin{frame}\frametitle{Today's Theme}
-
-\begin{center}
 \Huge{Let's implement \structure{useless} Python objects}
 \end{center}
 
@@ -230,14 +222,6 @@ A useless Python object behave \structure{Pythonic}, but does not work as expect
 
 \end{frame}
 
-\begin{frame}\frametitle{Pythonic Python objects}
-
-\begin{block}{How to implement Pythonic Python objects}
-We need to understand \structure{object protocols}.
-\end{block}
-
-\end{frame}
-
 \begin{frame}[fragile]\frametitle{Data Structures and Operations}
 
 \begin{exampleblock}{Basic Data Structures of Python}
@@ -256,6 +240,78 @@ We need to understand \structure{object protocols}.
 \item[\texttt{for}] Iteration
 \end{description}
 \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\texttt{Useless} Abstract Base Class}
+
+\begin{exampleblock}{Example: \texttt{Useless} ABC}
+\begin{pygments}{python}
+class Useless(abc.ABC):
+    def __init__(self, data: Optional[Iterable] = None):
+        if data is not None:
+            self._data = [v for v in data]
+        else:
+            self._data = []
+\end{pygments}
+\end{exampleblock}
+\texttt{Useless} abstract base is useful, contrary to its name.
+\end{frame}
+
+
+\begin{frame}[fragile]\frametitle{\texttt{len()} and \texttt{Sized}}
+
+\begin{block}{\texttt{object.\_\_len\_\_()}}
+Called to implement the built-in function \texttt{len()}.
+\end{block}
+
+\begin{exampleblock}{Example: \texttt{ElasticSized}}
+\begin{pygments}{python}
+class ElasticSized(Useless, Sized):
+    def __len__(self) -> int:
+        return random.randint(0, len(self._data))
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\texttt{in} and \texttt{Container}}
+
+\begin{block}{\texttt{object.\_\_contains\_\_()}}
+Called to implement membership test operators.
+\end{block}
+
+\begin{exampleblock}{Example: \texttt{ForgottenContainer}}
+\begin{pygments}{python}
+class ForgottenContainer(Useless, Container):
+    def __contains__(self, item) -> bool:
+        return True if random.random() >= 0.5 else False
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\texttt{for} and \texttt{Iterable}}
+
+\begin{block}{\texttt{object.\_\_iter\_\_()}}
+Called when an iterator is required for a container. 
+\end{block}
+
+\begin{exampleblock}{Example: \texttt{ShuffledIterable}}
+\begin{pygments}{python}
+class ShuffledIterable(Useless, Iterable):
+    def __iter__(self) -> Iterator:
+        return iter(random.sample(self._data, k=len(self._data)))
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}\frametitle{Object Protocols and Abstract Base Class}
+
+\begin{block}{How to implement Pythonic Python objects}
+We need to understand \structure{object protocols}.
+\end{block}
 
 \end{frame}
 
