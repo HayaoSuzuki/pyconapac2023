@@ -1,5 +1,6 @@
 import abc
 import collections.abc
+import math
 import random
 from typing import Optional
 
@@ -12,14 +13,17 @@ class Useless(abc.ABC):
             self._data = []
 
 
-class ElasticSized(Useless, collections.abc.Sized):
+class FibonacciSized(Useless, collections.abc.Sized):
     def __len__(self) -> int:
-        return random.randint(0, len(self._data))
+        phi = 1 + math.sqrt(5) / 2
+        return math.floor(
+            (1 / math.sqrt(5)) * pow(phi, len(self._data)) + (1 / 2)
+        )
 
 
-class ForgottenContainer(Useless, collections.abc.Container):
+class LiarContainer(Useless, collections.abc.Container):
     def __contains__(self, item) -> bool:
-        return True if random.random() >= 0.5 else False
+        return item not in self._data
 
 
 class ShuffledIterable(Useless, collections.abc.Iterable):

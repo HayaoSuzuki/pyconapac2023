@@ -170,27 +170,24 @@ The useless objects are useless, but how to make a useless object is very useful
 
 \begin{frame}[fragile]\frametitle{What is a useless Python object?}
 
-\begin{exampleblock}{Example: \texttt{ElasticSized}}
+\begin{exampleblock}{Example: \texttt{LiarContainer}}
 \begin{pygments}{python}
->>> s = ElasticSized([1, 2, 3, 4, 5])
->>> for _ in range(3):
-...     print(len(s), end=" ")
-...
-1 3 4
+>>> c = LiarContainer(["spam", "egg", "bacon"])
+>>> "spam" in c
+False
+>>> "tomato" in c
+True
 \end{pygments}
 \end{exampleblock}
 
 \end{frame}
-
 \begin{frame}[fragile]\frametitle{What is a useless Python object?}
 
-\begin{exampleblock}{Example: \texttt{ForgottenContainer}}
+\begin{exampleblock}{Example: \texttt{FibonacciSized}}
 \begin{pygments}{python}
->>> c = ForgottenContainer([1, 2, 3, 4, 5])
->>> for _ in range(3):
-...     print(3 in c, end=" ")
-...
-False True False
+>>> s = FibonacciSized(range(50))
+>>> len(s)
+8854443113994140
 \end{pygments}
 \end{exampleblock}
 
@@ -258,6 +255,21 @@ class Useless(abc.ABC):
 \texttt{Useless} abstract base is useful, contrary to its name.
 \end{frame}
 
+\begin{frame}[fragile]\frametitle{\texttt{in} and \texttt{Container}}
+
+\begin{block}{\texttt{object.\_\_contains\_\_()}}
+Called to implement membership test operators.
+\end{block}
+
+\begin{exampleblock}{Example: \texttt{LiarContainer}}
+\begin{pygments}{python}
+class LiarContainer(Useless, Container):
+    def __contains__(self, item) -> bool:
+        return item not in self._data
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
 
 \begin{frame}[fragile]\frametitle{\texttt{len()} and \texttt{Sized}}
 
@@ -265,27 +277,15 @@ class Useless(abc.ABC):
 Called to implement the built-in function \texttt{len()}.
 \end{block}
 
-\begin{exampleblock}{Example: \texttt{ElasticSized}}
+\begin{exampleblock}{Example: \texttt{FibonacciSized}}
 \begin{pygments}{python}
-class ElasticSized(Useless, Sized):
+class FibonacciSized(Useless, collections.abc.Sized):
     def __len__(self) -> int:
-        return random.randint(0, len(self._data))
-\end{pygments}
-\end{exampleblock}
-
-\end{frame}
-
-\begin{frame}[fragile]\frametitle{\texttt{in} and \texttt{Container}}
-
-\begin{block}{\texttt{object.\_\_contains\_\_()}}
-Called to implement membership test operators.
-\end{block}
-
-\begin{exampleblock}{Example: \texttt{ForgottenContainer}}
-\begin{pygments}{python}
-class ForgottenContainer(Useless, Container):
-    def __contains__(self, item) -> bool:
-        return True if random.random() >= 0.5 else False
+        phi = 1 + math.sqrt(5) / 2
+        return math.floor(
+            (1 / math.sqrt(5)) * pow(phi, len(self._data))
+            + (1 / 2)
+        )
 \end{pygments}
 \end{exampleblock}
 
