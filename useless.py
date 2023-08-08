@@ -2,7 +2,7 @@ import abc
 import collections.abc
 import math
 import random
-from typing import Optional
+from typing import Final, Optional
 
 
 class Useless(abc.ABC):
@@ -14,10 +14,11 @@ class Useless(abc.ABC):
 
 
 class FibonacciSized(Useless, collections.abc.Sized):
+    PHI: Final[float] = (1 + math.sqrt(5)) / 2
+
     def __len__(self) -> int:
-        phi = 1 + math.sqrt(5) / 2
         return math.floor(
-            (1 / math.sqrt(5)) * pow(phi, len(self._data)) + (1 / 2)
+            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2)
         )
 
 
@@ -29,3 +30,6 @@ class LiarContainer(Useless, collections.abc.Container):
 class ShuffledIterable(Useless, collections.abc.Iterable):
     def __iter__(self) -> collections.abc.Iterator:
         return iter(random.sample(self._data, k=len(self._data)))
+
+s = FibonacciSized(range(50))
+print(len(s))

@@ -187,7 +187,7 @@ True
 \begin{pygments}{python}
 >>> s = FibonacciSized(range(50))
 >>> len(s)
-8854443113994140
+12586269025
 \end{pygments}
 \end{exampleblock}
 
@@ -280,10 +280,10 @@ Called to implement the built-in function \texttt{len()}.
 \begin{exampleblock}{Example: \texttt{FibonacciSized}}
 \begin{pygments}{python}
 class FibonacciSized(Useless, collections.abc.Sized):
+    PHI: Final[float] = (1 + math.sqrt(5)) / 2
     def __len__(self) -> int:
-        phi = 1 + math.sqrt(5) / 2
         return math.floor(
-            (1 / math.sqrt(5)) * pow(phi, len(self._data))
+            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data))
             + (1 / 2)
         )
 \end{pygments}
