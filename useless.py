@@ -30,6 +30,3 @@ class LiarContainer(Useless, collections.abc.Container):
 class ShuffledIterable(Useless, collections.abc.Iterable):
     def __iter__(self) -> collections.abc.Iterator:
         return iter(random.sample(self._data, k=len(self._data)))
-
-s = FibonacciSized(range(50))
-print(len(s))

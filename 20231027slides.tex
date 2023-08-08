@@ -307,12 +307,62 @@ class ShuffledIterable(Useless, Iterable):
 
 \end{frame}
 
-\begin{frame}\frametitle{Object Protocols and Abstract Base Class}
+\begin{frame}\frametitle{Object Protocols}
 
 \begin{block}{How to implement Pythonic Python objects}
 We need to understand \structure{object protocols}.
 \end{block}
+Ref: \url{https://docs.python.org/3/reference/datamodel.html}
 
 \end{frame}
+
+\begin{frame}\frametitle{\texttt{collections.abc}}
+
+\begin{block}{\texttt{collections.abc}}
+This module provides \structure{abstract base classes} that can be used to test whether a class provides \structure{a particular interface}.
+\end{block}
+From \url{https://docs.python.org/3/library/collections.abc.html}
+
+\end{frame}
+
+%\begin{frame}\frametitle{\texttt{collections.abc}}
+%
+%\begin{exampleblock}{\texttt{collections.abc} and Interface}
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{lcr}
+%\hline
+%ABC  & Interface \\
+%\hline
+%\texttt{Sized}  & \texttt{len()} \\
+%\texttt{Container}  & \texttt{in} \\
+%\texttt{Iterable}  &  \texttt{\_\_iter\_\_()} \\
+%\texttt{Collection}  & \texttt{Sized}, \texttt{Container}, \texttt{Iterable}  \\
+%\hline
+%\end{tabular}
+%\end{table}
+%\end{exampleblock}
+%
+%\end{frame}
+%
+%\begin{frame}\frametitle{\texttt{collections.abc}}
+%
+%\begin{exampleblock}{\texttt{collections.abc} and Built-in Objects}
+%\begin{table}[h]
+%\centering
+%\begin{tabular}{lcr}
+%\hline
+%ABC  & built-in objects \\
+%\hline
+%\texttt{Sequence}  & \texttt{tuple} \\
+%\texttt{MutableSequence}  & \texttt{list} \\
+%\texttt{MutableSet}  &  \texttt{set} \\
+%\texttt{MutableMapping}  & \texttt{dict}  \\
+%\hline
+%\end{tabular}
+%\end{table}
+%\end{exampleblock}
+
+%\end{frame}
 
 \end{document}
