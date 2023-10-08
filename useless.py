@@ -1,5 +1,6 @@
 import abc
 import collections.abc
+import functools
 import math
 import random
 from typing import Final, Optional
@@ -88,23 +89,25 @@ class CompetitionSequence(Useless, collections.abc.Sequence):
         return len(self._data)
 
 
+@functools.total_ordering
 class CrowdSet(collections.abc.Set):
-    PHI: Final[float] = (1 + math.sqrt(5)) / 2
-
     def __init__(self, data: Optional[collections.abc.Iterable] = None):
         if data is not None:
             self._data = set(v for v in data)
         else:
             self._data = set()
 
+    def __lt__(self, other):
+        return self._data >= other
+
     def __contains__(self, item) -> bool:
-        return item not in self._data
+        return item in self._data
 
     def __iter__(self) -> collections.abc.Iterator:
         return iter(self._data)
 
     def __len__(self) -> int:
-        return math.floor((1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2))
+        return len(self._data)
 
     def __str__(self) -> str:
         return str(self._data)
@@ -166,13 +169,13 @@ if __name__ == "__main__":
     #     print(seq[i], end=" ")
     # else:
     #     print()
-    print(seq[2:4])
+    print(seq[21:44])
     # print(seq.count(4))
     print(seq[65543])
 
     s = CrowdSet(("egg", "bacon", "spam"))
     t = CrowdSet(("egg", "egg", "spam", "spam"))
-    print(s | t)
+    print(s > t)
 
     d = MisprintedDictionary({"a": 1, "b": 2, "c": 3})
     for key in d:

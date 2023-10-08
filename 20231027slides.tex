@@ -83,18 +83,18 @@
 \begin{block}{Who am I ?（お前誰よ）}
 \begin{description}
 \item[Name] Hayao Suzuki（鈴木　駿）
-\item[Twitter] \href{https://twitter.com/CardinalXaro}{@CardinalXaro}
+\item[\xout{Twitter} X] \href{https://twitter.com/CardinalXaro}{@CardinalXaro}
 \item[Work] Software Developer @ BeProud Inc.
 \end{description}
 \end{block}
 
 \begin{center}
 \begin{itemize}
-\item BeProud Inc. \includegraphics[width=3cm]{bplogo.png}
+\item \includegraphics[width=3cm]{bplogo.png} \structure{We are hiring} \url{https://www.beproud.jp/careers/en/}
 \begin{itemize}
-\item connpass \includegraphics[width=2cm]{connpass_logo_1.png}
-\item PyQ \includegraphics[width=1cm]{pyq_logo_color.png}
-\item Tracery \includegraphics[width=3cm]{tracery.png}
+\item \includegraphics[width=2cm]{connpass_logo_1.png} The event site for building connections
+\item \includegraphics[width=1cm]{pyq_logo_color.png} The best way to learn Python online
+\item \includegraphics[width=3cm]{tracery.png} A documentation service for system development
 \end{itemize}
 \end{itemize}
 \end{center}
@@ -413,10 +413,10 @@ class ModularSequence(Useless, collections.abc.Sequence):
 \begin{exampleblock}{Example: \texttt{ModularSequence}}
 \begin{pygments}{python}
 >>> seq = ModularSequence(range(20))
->>> print(seq[2:4])
-[12, 13]
+>>> print(seq[21:44])
+[1, 2, 3]
 >>> print(seq[65543])
-13
+3
 >>> seq.count(13) # It does not stop.
 \end{pygments}
 \end{exampleblock}
@@ -455,6 +455,51 @@ d[c]=3 d[b]=2 d[a]=1
 \end{pygments}
 \end{exampleblock}
 
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\texttt{Set}}
+
+\begin{exampleblock}{Example: \texttt{CrowdSet}}
+\begin{pygments}{python}
+@functools.total_ordering
+class CrowdSet(collections.abc.Set):
+    def __init__(self, data=None):
+        if data is not None:
+            self._data = set(v for v in data)
+        else:
+            self._data = set()
+
+    def __lt__(self, other):
+        return self._data >= other
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]\frametitle{\texttt{Set}}
+
+\begin{exampleblock}{Example: \texttt{CrowdSet}}
+\begin{pygments}{python}
+>>> s = CrowdSet(("egg", "bacon", "spam"))
+>>> t = CrowdSet(("egg", "egg", "spam", "spam"))
+>>> s > t
+True
+\end{pygments}
+\end{exampleblock}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}\frametitle{Conclusion}
+
+\begin{block}{Let's implement useless Python objects}
+\begin{itemize}
+\item Useless Python objects are useful
+\item \texttt{collections.abc} module is very useful
+\item Once you understand object protocol, you can do anything
+\end{itemize}
+\end{block}
 \end{frame}
 
 \end{document}
