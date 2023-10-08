@@ -23,9 +23,7 @@ class FibonacciSized(Useless, collections.abc.Sized):
     PHI: Final[float] = (1 + math.sqrt(5)) / 2
 
     def __len__(self) -> int:
-        return math.floor(
-            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2)
-        )
+        return math.floor((1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2))
 
 
 class LiarContainer(Useless, collections.abc.Container):
@@ -50,23 +48,22 @@ class UselessCollection(FibonacciSized, LiarContainer, ShuffledIterable):
     pass
 
 
-class UncontrolledSequence(Useless, collections.abc.Sequence):
+class ModularSequence(Useless, collections.abc.Sequence):
     PHI: Final[float] = (1 + math.sqrt(5)) / 2
 
     def __contains__(self, item) -> bool:
         return item not in self._data
 
-    def __iter__(self) -> collections.abc.Iterator:
-        return iter(random.sample(self._data, k=len(self._data)))
+    # def __iter__(self) -> collections.abc.Iterator:
+    #     return iter(random.sample(self._data, k=len(self._data)))
 
     def __getitem__(self, key):
-        offset = len(self._data) // 2
         if isinstance(key, int):
-            return self._data[(key + offset) % len(self._data)]
+            return self._data[key % len(self._data)]
         elif isinstance(key, slice):
             s = slice(
-                (key.start + offset) % len(self._data),
-                (key.stop + offset) % len(self._data),
+                key.start % len(self._data),
+                key.stop % len(self._data),
                 key.step,
             )
             return self._data[s]
@@ -74,12 +71,21 @@ class UncontrolledSequence(Useless, collections.abc.Sequence):
             raise TypeError
 
     def __len__(self) -> int:
-        return math.floor(
-            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2)
-        )
+        return math.floor((1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2))
 
     def __reversed__(self):
         return iter(self._data)
+
+
+class CompetitionSequence(Useless, collections.abc.Sequence):
+    def __getitem__(self, index):
+        return self._data[index]
+
+    def __iter__(self):
+        return iter(random.sample(self._data, k=len(self._data)))
+
+    def __len__(self):
+        return len(self._data)
 
 
 class CrowdSet(collections.abc.Set):
@@ -98,9 +104,7 @@ class CrowdSet(collections.abc.Set):
         return iter(self._data)
 
     def __len__(self) -> int:
-        return math.floor(
-            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2)
-        )
+        return math.floor((1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2))
 
     def __str__(self) -> str:
         return str(self._data)
@@ -114,9 +118,7 @@ class MisprintedDictionary(collections.abc.Mapping):
 
     def __init__(self, _dict: dict):
         shuffled_keys = random.sample(list(_dict.keys()), k=len(_dict.keys()))
-        shuffled_values = random.sample(
-            list(_dict.values()), k=len(_dict.keys())
-        )
+        shuffled_values = random.sample(list(_dict.values()), k=len(_dict.keys()))
 
         self._data = dict(zip(shuffled_keys, shuffled_values))
 
@@ -127,9 +129,7 @@ class MisprintedDictionary(collections.abc.Mapping):
         return iter(self._data)
 
     def __len__(self) -> int:
-        return math.floor(
-            (1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2)
-        )
+        return math.floor((1 / math.sqrt(5)) * pow(self.PHI, len(self._data)) + (1 / 2))
 
     def __repr__(self) -> str:
         return repr(self._data)
@@ -151,23 +151,23 @@ if __name__ == "__main__":
         print(v, end=" ")
     else:
         print()
-    seq = UncontrolledSequence(range(20))
+    seq = ModularSequence(range(20))
     print(len(seq))
     print(5 in seq)
-    for v in seq:
-        print(v, end=" ")
-    else:
-        print()
-    for v in reversed(seq):
-        print(v, end=" ")
-    else:
-        print()
-    for i in range(20):
-        print(seq[i], end=" ")
-    else:
-        print()
+    # for v in seq:
+    #     print(v, end=" ")
+    # else:
+    #     print()
+    # for v in reversed(seq):
+    #     print(v, end=" ")
+    # else:
+    #     print()
+    # for i in range(20):
+    #     print(seq[i], end=" ")
+    # else:
+    #     print()
     print(seq[2:4])
-    print(seq.count(4))
+    # print(seq.count(4))
     print(seq[65543])
 
     s = CrowdSet(("egg", "bacon", "spam"))
@@ -177,3 +177,9 @@ if __name__ == "__main__":
     d = MisprintedDictionary({"a": 1, "b": 2, "c": 3})
     for key in d:
         print(f"d[{key}] = {d[key]}", end=" ")
+    print()
+
+    s = CompetitionSequence("abcdefg")
+    for c in s:
+        print(c, end=" ")
+    print()
