@@ -242,20 +242,20 @@ A useless Python object behave \structure{Pythonic}, but does not work as expect
 
 \end{frame}
 
-\begin{frame}[fragile]\frametitle{\texttt{Useless} Abstract Base Class}
-
-\begin{exampleblock}{Example: \texttt{Useless} ABC}
-\begin{pygments}{python}
-class Useless(abc.ABC):
-    def __init__(self, data: Optional[Iterable] = None):
-        if data is not None:
-            self._data = [v for v in data]
-        else:
-            self._data = []
-\end{pygments}
-\end{exampleblock}
-\texttt{Useless} abstract base is useful, contrary to its name.
-\end{frame}
+%\begin{frame}[fragile]\frametitle{\texttt{Useless} Abstract Base Class}
+%
+%\begin{exampleblock}{Example: \texttt{Useless} ABC}
+%\begin{pygments}{python}
+%class Useless(abc.ABC):
+%    def __init__(self, data: Optional[Iterable] = None):
+%        if data is not None:
+%            self._data = [v for v in data]
+%        else:
+%            self._data = []
+%\end{pygments}
+%\end{exampleblock}
+%\texttt{Useless} abstract base is useful, contrary to its name.
+%\end{frame}
 
 \begin{frame}[fragile]\frametitle{\texttt{in} and \texttt{Container}}
 
@@ -265,7 +265,7 @@ Called to implement membership test operators.
 
 \begin{exampleblock}{Example: \texttt{LiarContainer}}
 \begin{pygments}{python}
-class LiarContainer(Useless, Container):
+class LiarContainer(Container):
     def __contains__(self, item) -> bool:
         return item not in self._data
 \end{pygments}
@@ -281,7 +281,7 @@ Called to implement the built-in function \texttt{len()}.
 
 \begin{exampleblock}{Example: \texttt{FibonacciSized}}
 \begin{pygments}{python}
-class FibonacciSized(Useless, collections.abc.Sized):
+class FibonacciSized(Sized):
     PHI: Final[float] = (1 + math.sqrt(5)) / 2
     def __len__(self) -> int:
         return math.floor(
@@ -301,7 +301,7 @@ Called when an iterator is required for a container.
 
 \begin{exampleblock}{Example: \texttt{ShuffledIterable}}
 \begin{pygments}{python}
-class ShuffledIterable(Useless, Iterable):
+class ShuffledIterable(Iterable):
     def __iter__(self) -> Iterator:
         return iter(random.sample(self._data, k=len(self._data)))
 \end{pygments}
@@ -390,7 +390,7 @@ ABC  & built-in objects \\
 
 \begin{exampleblock}{Example: \texttt{ModularSequence}}
 \begin{pygments}{python}
-class ModularSequence(Useless, collections.abc.Sequence):
+class ModularSequence(Sequence):
     def __getitem__(self, key):
         if isinstance(key, int):
             return self._data[key % len(self._data)]
@@ -427,7 +427,7 @@ class ModularSequence(Useless, collections.abc.Sequence):
 
 \begin{exampleblock}{Example: \texttt{MisprintedDictionary}}
 \begin{pygments}{python}
-class MisprintedDictionary(collections.abc.Mapping):
+class MisprintedDictionary(Mapping):
     def __init__(self, _dict: dict):
         shuffled_keys = random.sample(
             list(_dict.keys()), k=len(_dict.keys())
@@ -462,7 +462,7 @@ d[c]=3 d[b]=2 d[a]=1
 \begin{exampleblock}{Example: \texttt{CrowdSet}}
 \begin{pygments}{python}
 @functools.total_ordering
-class CrowdSet(collections.abc.Set):
+class CrowdSet(Set):
     def __init__(self, data=None):
         if data is not None:
             self._data = set(v for v in data)
