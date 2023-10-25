@@ -106,7 +106,7 @@ PythonicなPythonオブジェクトを実装するには、inには__contains__�
 Pythonの公式ドキュメントや、そうですね、Python Distilledを読むと理解できるようになります。買ってくださいね。
 
 とはいえ、オブジェクトプロトコルを満たすクラスを0から実装するのは大変です。
-そこで役に立つのがcollectoins.abcにある抽象基底クラスです。
+そこで役に立つのがcollections.abcにある抽象基底クラスです。
 
 ContainerやSized、IterableはそれぞれABCにある名前でもあります。端的に言えば、欲しいインタフェイスを満たすABCを継承すれば簡単にほしいクラスが実装出来ます。
 間違っていれば、Pythonが教えてくれます。

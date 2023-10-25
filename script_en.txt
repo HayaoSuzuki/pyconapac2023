@@ -1,0 +1,138 @@
+Hello everyone.
+Today, I will be talking about "Let's implement useless Python objects".
+
+The presentation materials for this talk are available on my GitHub repository.
+Also, the Twitter, no, sorry, the X hashtag for this room is here.
+
+Let me introduce myself.
+"Omae dare yo" is translated into Pythonic Japanese as "Who am I?".
+My name is Hayao Suzuki.
+It is written my name in Kanji, or chinese character.
+My Twitter, No, X accounts are here.
+I work at Be-Proud, a Gold Sponsor of PyCon APAC 2023.
+Let me introduce Be-Proud.
+connpass, the networking event site,
+Py-Q, the best way to learn Python online,
+tracery, a system development documentation service.
+We are currently hiring.
+Work with us.
+
+Recently, I published a translated book from O'Reilly Japan.
+This book.
+Do you have it?
+Please buy it on Amazon or bookstores.
+
+This is my fourth time speaking at PyCon JP.
+For the most part, I speak on topics I like.
+
+And now, today's topic is "Let's implement useless Python objects".
+Let's implement useless Python objects.
+So, yes, useless.
+
+First, let's review the definition of the word, "useless".
+What does "useless" mean?
+Let us quote from the dictionary.
+"not useful or effective in any way"
+"unable or unwilling to do anything properly".
+I see that "useless" is the negative word for "useful".
+
+But I would like to ask all of you here.
+Is useless really useless?
+Let me quote from the ancient Chinese philosopher Zhuangzi's Renjian shi.
+The English word for Renjian shi is human world.
+This is ancient Chinese.
+The ancient Japanese people developed a way to read this as Japanese.
+Translated into English, it reads,
+Everyone knows the usefulness of the useful, but no one knows the uselessness of the useless.
+
+What does this mean?
+Useless objects are not useful, but the way we make useless objects is useful.
+As Zhuangzi says, useless objects are useful.
+
+By the way, what exactly are useless Python objects?
+Here's an example.
+A LiarContainer object says it doesn't have an object it actually has, and claims to have an object it doesn't have.
+It is useful, I think.
+
+The next example is a FibonacciSized object.
+The len() function returns the Fibonacci sequence of the number of elements in the object.
+It is useful, I think.
+
+The another next is ShuffledIterable object.
+When iterated with a for statement, it returns a random result each time.
+It is useful, I think.
+
+And now, there are four basic data structures in Python: lists, tuples, dictionaries, and sets.
+Each of these is a different data structure, but they also have some common elements.
+In each case, the number of elements can be obtained with the len() function.
+The `in` operator can be used to check whether an element exists or not.
+And, you can iterate with the for operator.
+len, in, for.
+How do we create our own objects that are compatible with these operations?
+
+Let's start with the in operator.
+To make your own class correspond to the in operator, implement the contains() method.
+The object that corresponds to the in operator is called Container.
+LiarContainer is implemented to return the opposite result of the actual in operator.
+Thus, the class has methods that correspond to most operators and functions.
+By implementing the appropriate methods, both useless and useful objects can be easily implemented.
+
+Next is the len function.
+To make your own class correspond to the len function, implement the len() method.
+The object that corresponds to the len function is also called Sized.
+FibonacciSized returns the Fibonacci sequence when the len() function is used to find the number of elements in an object.
+Since the len() method only needs to return an int value at the end, it is no problem to return the value of the Fibonacci sequence instead of the number of elements in the data structure.
+Yes, no problem.
+
+Next is the for statement.
+There are several ways to realize the for statement, but this time we will use the method that implements the iter() method.
+The iter method also only needs to return an iterator, which in this case is shuffled, but it can be an empty iterator, for example, or an iterator of a completely unrelated object.
+An object corresponding to a for statement is called an iterable.
+Even if an object returns only an empty iterator, it is iterable.
+
+So far, we have introduced objects that correspond to in, len, and for statements.
+To implement Python objects, you need to understand Python's object protocols, such as contains for in and len for len.
+You can read the official Python documentation and, yes, Python Distilled to understand it. Please buy it.
+
+However, it is difficult to implement a class from scratch that satisfies the object protocol.
+This is where the abstract base class in collections.abc comes in handy.
+
+Container, Sized, and Iterable are also names in ABC, respectively. Simply put, you can easily implement the class you want by inheriting from ABC that satisfies the interface you want.
+If you are wrong, Python will tell you.
+
+And the common interface of List, Tuple, Dictionary, and Set is Collection.
+The interface that satisfies Sized, Container, and Iterable is Collection.
+Simply inherit from the previous class to complete the Collection.
+If you do not want multiple inheritance, you may implement methods individually.
+
+This is the basic section, and you can do some interesting things up to this point, but you also want to create something similar to a list or tuple.
+ABCs for existing data structures are also available, so you can implement your own lists and tuples!
+
+The first one is ModularSequence, which is a data structure similar to a tuple.
+I mentioned earlier that there are multiple ways to realize a for statement, and one way other than iter is to implement getitem.
+ModularSequence implements a sequence of numbers that goes on indefinitely by including a modular calculation.
+
+In this way, values that should not exist can also be retrieved.
+It goes on infinitely, so a count() or for statement would result in an infinite loop.
+I did it.
+
+The dictionary also inherits from Mapping ABC and simply implements the necessary methods.
+MisprintedDictionary messes up during initialization.
+It may be messed up, but it still functions as a dictionary.
+This is a dictionary. It is not ex-dictionary.
+
+As you can see when you actually move it, it is in pieces.
+But this is also a dictionary.
+
+The set should also be implemented to satisfy Set ABC.
+Messing up the lt method makes inclusion relations weird.
+
+As a set, it is strange, but as a data structure, the dictionary is implemented correctly.
+
+This was a bit rushed, but I will summarize.
+We have implemented a useless Python object.
+The object itself is useless, but the way it is created is useful.
+Also, by using collections.abc, we can implement it more easily.
+The key is the object protocol.
+Once you understand it, you are free to go from useful to useless.
+Thanks for your attention.
