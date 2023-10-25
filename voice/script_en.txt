@@ -5,17 +5,17 @@ The presentation materials for this talk are available on my GitHub repository.
 Also, the Twitter, no, sorry, the X hashtag for this room is here.
 
 Let me introduce myself.
-"Omae dare yo" is translated into Pythonic Japanese as "Who am I?".
 My name is Hayao Suzuki.
 It is written my name in Kanji, or chinese character.
 My Twitter, No, X accounts are here.
 I work at Be-Proud, a Gold Sponsor of PyCon APAC 2023.
 Let me introduce Be-Proud.
-connpass, the networking event site,
-Py-Q, the best way to learn Python online,
+There are our services.
+connpass, the networking event site.
+Pie-Q, the best way to learn Python online.
 tracery, a system development documentation service.
-We are currently hiring.
-Work with us.
+Now, we are currently hiring.
+Let's work with us.
 
 Recently, I published a translated book from O'Reilly Japan.
 This book.
