@@ -1,12 +1,12 @@
 Hello everyone.
 Today, I will be talking about "Let's implement useless Python objects".
+Let's begin.
 
 The presentation materials for this talk are available on my GitHub repository.
 Also, the Twitter, no, sorry, the X hashtag for this room is here.
 
 Let me introduce myself.
 My name is Hayao Suzuki.
-It is written my name in Kanji, or chinese character.
 My Twitter, No, X accounts are here.
 I work at Be-Proud, a Gold Sponsor of PyCon APAC 2023.
 Let me introduce Be-Proud.
@@ -38,16 +38,14 @@ I see that "useless" is the negative word for "useful".
 
 But I would like to ask all of you here.
 Is useless really useless?
-Let me quote from the ancient Chinese philosopher Zhuangzi's Renjian shi.
-The English word for Renjian shi is human world.
-This is ancient Chinese.
+Let me quote from the ancient Chinese philosopher Shoushi.
+This is ancient Chinese text.
 The ancient Japanese people developed a way to read this as Japanese.
 Translated into English, it reads,
 Everyone knows the usefulness of the useful, but no one knows the uselessness of the useless.
-
 What does this mean?
 Useless objects are not useful, but the way we make useless objects is useful.
-As Zhuangzi says, useless objects are useful.
+As Shoushi says, useless objects are useful.
 
 By the way, what exactly are useless Python objects?
 Here's an example.
@@ -62,12 +60,14 @@ The another next is ShuffledIterable object.
 When iterated with a for statement, it returns a random result each time.
 It is useful, I think.
 
+I will define a useless Python object.
+A useless Python object behave Pythonic, but does not work as expected.
+
 And now, there are four basic data structures in Python: lists, tuples, dictionaries, and sets.
 Each of these is a different data structure, but they also have some common elements.
 In each case, the number of elements can be obtained with the len() function.
 The `in` operator can be used to check whether an element exists or not.
 And, you can iterate with the for operator.
-len, in, for.
 How do we create our own objects that are compatible with these operations?
 
 Let's start with the in operator.
