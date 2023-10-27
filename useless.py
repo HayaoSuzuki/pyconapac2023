@@ -58,6 +58,30 @@ class ShuffledIterable(collections.abc.Iterable):
         return iter(random.sample(self._data, k=len(self._data)))
 
 
+class EmptyIterable(collections.abc.Iterable):
+
+    def __init__(self, data: typing.Optional[collections.abc.Iterable] = None):
+        if data is not None:
+            self._data = [v for v in data]
+        else:
+            self._data = []
+
+    def __iter__(self) -> collections.abc.Iterator:
+        return iter(tuple())
+
+
+class FixedIterable(collections.abc.Iterable):
+
+    def __init__(self, data: typing.Optional[collections.abc.Iterable] = None):
+        if data is not None:
+            self._data = [v for v in data]
+        else:
+            self._data = []
+
+    def __iter__(self) -> collections.abc.Iterator:
+        return iter(("Do NOT iterate me !", ))
+
+
 class ReversedReversible(collections.abc.Reversible):
     def __init__(self, data: typing.Optional[collections.abc.Iterable] = None):
         if data is not None:
@@ -243,3 +267,13 @@ if __name__ == "__main__":
     for c in s:
         print(c, end=" ")
     print()
+
+    empty = EmptyIterable([3, 4, 1, 2, 3])
+    for e in empty:
+        print(e, end=" ")
+    print("???")
+
+    fixed = FixedIterable([4, 1, 2, 3, 0])
+    for v in fixed:
+        print(v, end=" ")
+        print()
